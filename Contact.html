@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+            color: #333333;
+            background-image: url('path/to/your/background-image.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 5;
+            font-size: 50px;
+            padding: 1px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            background-color: #e74c3c;
+        }
+
+        .container {
+            width: 100%;
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+            max-width: 600px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-form h2 {
+            margin-top: 0;
+            font-size: 2em;
+            color: #bb1010;
+            border-bottom: 2px solid #ff6347;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #ff6347;
+            box-shadow: 0 0 8px rgba(255, 99, 71, 0.5);
+            outline: none;
+        }
+
+        .contact-form button {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #333;
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            nav ul li {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
+            }
+
+            .title {
+                font-size: medium;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html" style="color: inherit; text-decoration: none;">Daily News Portal</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="world.html">World</a></li>
+                <li><a href="Politic.html">Politic</a></li>
+                <li><a href="Technology.html">Technology</a></li>
+                <li><a href="sports.html">Sports</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main>
+            <div class="title" style="color: #bb1010ce; text-align: left; font-size: larger; font-weight: bolder;">For Any Query Contact Us</div>
+            <div class="contact-form">
+                <h2>Get in Touch</h2>
+                <form action="#" method="post">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <footer>
+        <p>&copy; 2023 Daily News Portal. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

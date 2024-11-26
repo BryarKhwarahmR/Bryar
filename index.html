@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Website</title>
+    <style>
+        :root {
+            /* Existing color palette */
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --background-color: #f5f5f5;
+            --text-color: #0e0505;
+
+            /* New color palette */
+            --weather-bg: #447cce;
+            --prayer-bg: #160101;
+            --currency-bg: #f38212;
+            --section-text: #ffffff;
+
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .login-link {
+            color: white;
+            background: #3498db;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .login-link:hover {
+            background: #021623;
+        }
+
+        nav {
+            margin: 40px 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: rgb(249, 238, 238);
+            padding: 10px;
+        }
+
+        nav a.active {
+            color: white;
+            background-color: #e74c3c;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: var(--tab-hover-color);
+            color: rgb(175, 54, 54);
+
+
+        }
+
+        .breaking-news {
+            background: #ffcc00;
+            color: #333;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .breaking-news span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scrollText 20s linear infinite;
+        }
+
+        @keyframes scrollText {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .main-content {
+            display: flex;
+            margin: 20px;
+        }
+
+        .news-section {
+            flex: 2;
+            margin-right: 20px;
+        }
+
+        .news-article {
+            background: #f9f9f9;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .news-article h3 {
+            margin-top: 0;
+        }
+
+        .sidebar {
+            flex: 0.5;
+            text-align: center;
+        }
+
+        .widget {
+            background: #f9f9f9;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .currency-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            color: #ffffff;
+            /* Changed text color */
+        }
+
+        .currency-table th,
+        .currency-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+
+
+            border-radius: 5px;
+        }
+
+        .currency-table th {
+            background: #1e6fa5;
+            /* Changed header background color */
+            color: #ffffff;
+            /* Changed header text color */
+        }
+
+        .currency-table td {
+            background: #2c3e50;
+            /* Changed cell background color */
+            color: #ecf0f1;
+            /* Changed cell text color */
+        }
+
+        .currency-table tr:nth-child(even) {
+            background-color: #34495e;
+            /* Changed even row background */
+        }
+
+        .currency-table tr:hover {
+            background-color: #1abc9c;
+            /* Changed hover color */
+        }
+
+        .currency-converter {
+            margin-top: 15px;
+            background-color: var(--currency-bg);
+            color: var(--section-text);
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .currency-converter input,
+        .currency-converter select {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .currency-converter button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .currency-converter button:hover {
+            background-color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        .weather img {
+            width: 50px;
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .weather img:hover {
+            transform: scale(1.1);
+        }
+
+        .weather {
+            display: flex;
+            align-items: center;
+            background-color: var(--weather-bg);
+            color: var(--section-text);
+            padding: 20px;
+            border-radius: 50px;
+        }
+
+        .weather div {
+            margin-left: 10px;
+            color: white;
+        }
+
+        #city-dropdown {
+            margin-top: 10px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .weather-section,
+        .currency-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .header-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .header,
+        .footer {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .button {
+            background-color: var(--secondary-color);
+            border: none;
+            color: #ffffff;
+        }
+
+        .button:hover {
+            background-color: var(--accent-color);
+        }
+
+
+        /* Prayer Times Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+            background-color: #046552;
+            color: white;
+
+        }
+
+        table thead {
+            background-color: var(--prayer-bg);
+            color: var(--section-text);
+        }
+
+        table th,
+        table td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #dddddd;
+
+        }
+
+        table tbody tr:nth-child(even) {
+            border-color: #e74c3c;
+        }
+
+        table tbody tr:hover {
+            background-color: #817b76;
+        }
+
+        .container {
+            width: 100%;
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html" style="color: inherit; text-decoration: none;">Daily News Portal</a></h1>
+        <div class="header-right">
+            <a href="../Admin/login.html" class="login-link">Login</a>
+        </div>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="world.html">World</a>
+            <a href="politic.html">Politics</a>
+            <a href="technology.html">Technology</a>
+            <a href="sports.html">Sports</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="breaking-news">
+            <span>Breaking News: Global markets rally amid economic recovery – More updates on our live blog!</span>
+        </div>
+    </header>
+    <header>
+
+
+
+    </header>
+
+    <div class="main-content">
+        <!-- News Section -->
+        <div class="news-section">
+            <h2>Top News</h2>
+            <div class="news-article">
+                <h3>Headline 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a magna nec erat blandit
+                    tristique.</p>
+            </div>
+            <div class="news-article">
+                <h3>Headline 2</h3>
+                <p>Aliquam erat volutpat. Sed fermentum, nisi at venenatis tincidunt, ipsum nisi faucibus velit.</p>
+            </div>
+            <div class="news-article">
+                <h3>Headline 3</h3>
+                <p>Curabitur sodales est id nisi sollicitudin, ac tincidunt justo scelerisque.</p>
+            </div>
+        </div>
+
+        <!-- Sidebar Widgets -->
+        <aside class="sidebar">
+            <!-- Weather Widget -->
+            <div class="widget">
+                <h2>Weather</h2>
+                <!-- Update Weather Icon Element -->
+                <div class="weather fade-in">
+                    <img id="weather-icon" src="" alt="">
+                    <div class="city" id="weather-city">
+                        <p id="temperature"><strong>25°C</strong></p>
+                        <p id="humidity">Humidity: --%</p>
+                        <p id="description">Sunny</p>
+                        <p>Location: Baghdad</p>
+                    </div>
+                </div>
+                <select id="city" onchange="updateCityWeather()">
+                    <option value="Baghdad">Baghdad</option>
+                    <option value="Erbil">Erbil</option>
+                    <option value="Basra">Basra</option>
+                    <option value="Mosul">Mosul</option>
+                    <option value="Karbala">Karbala</option>
+                    <option value="Najaf">Najaf</option>
+                    <option value="Sulaymaniyah">Sulaymaniyah</option>
+                    <option value="Duhok">Duhok</option>
+                    <option value="Tikrit">Tikrit</option>
+                    <option value="Samawah">Samawah</option>
+                    <option value="Kut">Kut</option>
+                    <option value="Nasiriyah">Nasiriyah</option>
+                </select>
+            </div>
+            <div>
+                <H1>Prayer Times</H1>
+                <div class="prayer-times prayer-time">
+                    <h2>Select Your City</h2>
+                    <select id="prayer-city-dropdown" onchange="updatePrayerTimes()">
+                        <option value="Baghdad">Baghdad</option>
+                        <option value="Erbil">Erbil</option>
+                        <option value="Basra">Basra</option>
+                        <option value="Mosul">Mosul</option>
+                        <option value="Karbala">Karbala</option>
+                        <option value="Najaf">Najaf</option>
+                        <option value="Sulaymaniyah">Sulaymaniyah</option>
+                        <option value="Duhok">Duhok</option>
+                        <option value="Tikrit">Tikrit</option>
+                        <option value="Samawah">Samawah</option>
+                        <option value="Kut">Kut</option>
+                        <option value="Nasiriyah">Nasiriyah</option>
+                    </select>
+                    <h3>Prayer Times for <span id="city-name">Baghdad</span></h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Prayer</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prayer-times-table" style="border: 1px solid #ddd;">
+                            <tr>
+                                <td>Fajr</td>
+                                <td id="fajr">--:--</td>
+                            </tr>
+                            <tr>
+                                <td>Dhuhr</td>
+                                <td id="dhuhr">--:--</td>
+                            </tr>
+                            <tr>
+                                <td>Asr</td>
+                                <td id="asr">--:--</td>
+                            </tr>
+                            <tr>
+                                <td>Maghrib</td>
+                                <td id="maghrib">--:--</td>
+                            </tr>
+                            <tr>
+                                <td>Isha</td>
+                                <td id="isha">--:--</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <script>
+                    async function fetchPrayerTimes(city) {
+                        const url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Iraq&method=2`;
+
+                        try {
+                            const response = await fetch(url);
+                            const data = await response.json();
+                            const timings = data.data.timings;
+
+                            // Update Prayer Times in the Table
+                            document.getElementById('fajr').innerText = timings.Fajr;
+                            document.getElementById('dhuhr').innerText = timings.Dhuhr;
+                            document.getElementById('asr').innerText = timings.Asr;
+                            document.getElementById('maghrib').innerText = timings.Maghrib;
+                            document.getElementById('isha').innerText = timings.Isha;
+                        } catch (error) {
+                            console.error('Error fetching prayer times:', error);
+                        }
+                    }
+
+                    /* Removed the unused convertTo12Hour function */
+
+                    function updatePrayerTimes() {
+                        const city = document.getElementById('prayer-city-dropdown').value;
+                        document.getElementById('city-name').innerText = city;
+
+                        // Fetch the prayer times
+                        fetchPrayerTimes(city).then(() => {
+                            // Ensure all times are displayed in a 12-hour format
+                            const timings = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+                            timings.forEach((time) => {
+                                const element = document.getElementById(time);
+                                const time24 = element.innerText;
+                                const time12 = time24.replace(/^(\d{2}):(\d{2})$/, (_, hh, mm) => {
+                                    const hour = parseInt(hh, 10);
+                                    const period = hour < 12 ? 'AM' : 'PM';
+                                    const hour12 = hour % 12 || 12; // Convert hour to 12-hour format
+                                    return `${hour12}:${mm} ${period}`;
+                                });
+                                element.innerText = time12;
+                            });
+                        });
+                    }
+
+                    // On initial load
+                    window.addEventListener('load', () => {
+                        updatePrayerTimes();
+                        updateCityWeather();
+                    });
+
+                </script>
+            </div>
+
+
+            <!-- Currency Widget -->
+            <div class="widget">
+                <h2>Currency Rates</h2>
+                <table class="currency-table">
+                    <thead>
+                        <tr>
+                            <th>Currency</th>
+                            <th>Rate (IQD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>USD</td>
+                            <td>1460</td>
+                        </tr>
+                        <tr>
+                            <td>EUR</td>
+                            <td>1550</td>
+                        </tr>
+                        <tr>
+                            <td>GBP</td>
+                            <td>1800</td>
+                        </tr>
+                        <tr>
+                            <td>IQD</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="currency-converter">
+                    <input type="number" id="amount" placeholder="Amount">
+                    <select id="currency">
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                        <option value="IQD">IQD</option>
+                    </select>
+                    <button onclick="convertCurrency()">Convert</button>
+                    <p id="conversion-result"></p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Daily News Hub. All rights reserved.</p>
+    </footer>
+
+    <!-- Add Skycons Library -->
+    <script src="https://cdn.jsdelivr.net/npm/skycons@1.0.0/skycons.js"></script>
+
+    <script>
+        const WEATHER_API_KEY = 'be9407b96a34e50063bfee320f5a2348';
+        const skycons = new Skycons({ color: "white" });
+        skycons.play();
+
+        function setSkycon(icon, elementId) {
+            const skyconMapping = {
+                "01d": Skycons.CLEAR_DAY,
+                "01n": Skycons.CLEAR_NIGHT,
+                "02d": Skycons.PARTLY_CLOUDY_DAY,
+                "02n": Skycons.PARTLY_CLOUDY_NIGHT,
+                "03d": Skycons.CLOUDY,
+                "03n": Skycons.CLOUDY,
+                "04d": Skycons.CLOUDY,
+                "04n": Skycons.CLOUDY,
+                "09d": Skycons.RAIN,
+                "09n": Skycons.RAIN,
+                "10d": Skycons.RAIN,
+                "10n": Skycons.RAIN,
+                "11d": Skycons.SLEET,
+                "50d": Skycons.FOG,
+                "50n": Skycons.FOG
+            };
+
+            skycons.set(elementId, skyconMapping[icon]);
+        }
+
+        async function updateCityWeather() {
+            const city = document.getElementById('city').value;
+            const apiKey = 'be9407b96a34e50063bfee320f5a2348';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cod === 200) {
+                        document.getElementById('temperature').innerText = `${data.main.temp}°C`;
+                        document.getElementById('humidity').innerText = `${data.main.humidity}%`;
+                        document.getElementById('description').innerText = capitalizeFirstLetter(data.weather[0].description);
+
+                        const iconCode = data.weather[0].icon;
+                        const iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
+                        document.getElementById('weather-icon').src = iconUrl;
+                        document.getElementById('weather-icon').alt = data.weather[0].description;
+                    } else {
+                        // Handle city not found or other errors
+                        document.getElementById('temperature').innerText = 'N/A';
+                        document.getElementById('humidity').innerText = 'N/A';
+                        document.getElementById('description').innerText = 'Unable to fetch weather data.';
+                        document.getElementById('weather-icon').src = '';
+                        document.getElementById('weather-icon').alt = '';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                    document.getElementById('temperature').innerText = 'N/A';
+                    document.getElementById('humidity').innerText = 'N/A';
+                    document.getElementById('description').innerText = 'Error fetching data.';
+                    document.getElementById('weather-icon').src = '';
+                    document.getElementById('weather-icon').alt = '';
+                });
+        }
+
+        /* Helper function to capitalize the first letter */
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // Initial Load
+        window.onload = () => {
+            updateCityWeather();
+        };
+
+        function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const currency = document.getElementById('currency').value;
+
+            let rate;
+
+            if (currency === 'USD') {
+                rate = 1460;
+            } else if (currency === 'EUR') {
+                rate = 1550;
+            } else if (currency === 'GBP') {
+                rate = 1800;
+            } else {
+                rate = 1; // IQD to IQD conversion
+            }
+
+            const result = (amount * rate).toLocaleString();
+            document.getElementById('conversion-result').innerText = `Converted: ${result} IQD`;
+        }
+    </script>
+
+
+</body>
+
+</html>

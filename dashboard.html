@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #f0f2f5;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
+
+        .profile h3 {
+            margin: 10px 0 0;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        .menu a {
+            display: block;
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #34495e;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 0;
+            background-color: #1abc9c;
+            transition: width 0.3s;
+        }
+
+        .menu a:hover {
+            background-color: #34495e;
+            transform: translateX(10px);
+        }
+
+        .menu a:hover::before {
+            width: 100%;
+        }
+
+        .menu a.active,
+        .menu a.settings {
+            background-color: #34495e;
+        }
+
+        .settings {
+            margin-top: auto;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            flex: 1 1 calc(33.333% - 20px);
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: #ffffff;
+            line-height: 100px;
+            margin: 0 auto 10px;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                flex: 1 1 calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card {
+                flex: 1 1 100%;
+            }
+        }
+
+        .logout-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .logout-button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile">
+            <img src="https://via.placeholder.com/150" alt="User Profile Photo">
+            <h3>Admin User</h3>
+        </div>
+        <div class="menu">
+            <a href="#" onclick="setActive(this); showContent('home')"><i>🏠</i> Home</a>
+            <a href="#" onclick="setActive(this); showContent('results')"><i>📊</i> Results</a>
+            <a href="#" onclick="setActive(this); showContent('chat')"><i>💬</i> Chat</a>
+            <a href="#" onclick="setActive(this); showContent('messages')"><i>📩</i> Messages</a>
+            <a href="#" onclick="setActive(this); showContent('notifications')"><i>🔔</i> Notifications</a>
+            <a href="#" onclick="setActive(this); showContent('settings')"><i>⚙️</i> Settings</a>
+        </div>
+        <a href="../GeneralUserPages/index.html" class="logout-button">Logout</a>
+    </div>
+</body>
+
+</html>
+
+<!-- Main Content -->
+<div class="main-content" id="main-content">
+    <h1>Dashboard User</h1>
+    <div class="cards">
+        <div class="card">
+            <div class="progress-circle">78%</div>
+            <h3>Monthly Users</h3>
+            <p>285</p>
+        </div>
+        <div class="card">
+            <div class="progress-circle">45%</div>
+            <h3>Weekly Users</h3>
+            <p>123</p>
+        </div>
+        <div class="card">
+            <div class="progress-circle">65%</div>
+            <h3>Daily Users</h3>
+            <p>197</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showContent(section) {
+        const mainContent = document.getElementById('main-content');
+        let content = '';
+
+        switch (section) {
+            case 'home':
+                content = `
+                        <h1>Welcome to the Home Page</h1>
+                        <p>This is your home dashboard overview.</p>
+                    `;
+                break;
+            case 'results':
+                content = '<h1>Results</h1><p>Results content goes here.</p>';
+                break;
+            case 'chat':
+                content = '<h1>Chat</h1><p>Chat content goes here.</p>';
+                break;
+            case 'messages':
+                content = '<h1>Messages</h1><p>Messages content goes here.</p>';
+                break;
+            case 'notifications':
+                content = '<h1>Notifications</h1><p>Notifications content goes here.</p>';
+                break;
+            case 'settings':
+                content = `
+                        <h1>Settings</h1>
+                        <p>Configure your preferences here.</p>
+                    `;
+                break;
+            default:
+                content = '<h1>Dashboard User</h1>';
+        }
+
+        mainContent.innerHTML = content;
+    }
+    function setActive(element) {
+        const links = document.querySelectorAll('.menu a');
+        links.forEach(link => link.classList.remove('active'));
+        element.classList.add('active');
+    }
+</script>
+</body>
+
+</html>
